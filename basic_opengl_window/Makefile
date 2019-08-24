@@ -12,7 +12,6 @@ debug: OPTIMISATION := -g3 -O0
 debug: $(OUTPUT)
 
 CXXFLAGS = $(OPTIMISATION) -no-pie -std=c++17 -Wall -Werror -Wfatal-errors -pthread `sdl2-config --cflags`
-CCFLAGS  = $(OPTIMISATION) -no-pie -std=c99 -Wall -Werror -Wfatal-errors -Wno-unused-variable -Wno-unused-result -Wno-unused-function -pthread -ldl
 
 COMMDIR = ../common
 INCDIRS = $(COMMDIR)/include
