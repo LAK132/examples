@@ -1,0 +1,24 @@
+{
+    "env": {
+        "commonInclude": "common/include"
+    },
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${commonInclude}/**",
+                "/usr/include/SDL2/**",
+                "${workspaceFolder}/**"
+            ]
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${commonInclude}/**",
+                "${commonInclude}/SDL/**",
+                "${workspaceFolder}/**"
+            ]
+        }
+    ],
+    "version": 4
+}
