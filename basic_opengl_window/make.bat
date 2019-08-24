@@ -36,10 +36,10 @@ echo Compiling in %mode% mode for %target%
 title Compiler
 
 REM some windows functions are pedantic about \
-set OBJDIR=!OBJDIR!\%mode%\%target%
-set LIBDIR=!LIBDIR!\%target%
+set _OBJDIR_=!OBJDIR!\%mode%\%target%
+set _LIBDIR_=!LIBDIR!\%target%
 
-if not exist %OBJDIR% mkdir %OBJDIR%
+if not exist %_OBJDIR_% mkdir %_OBJDIR_%
 if not exist %BINDIR% mkdir %BINDIR%
 
 if "%mode%"=="debug" goto run
@@ -51,20 +51,19 @@ echo clean: "make clean"
 goto :eof
 
 :clean
-for /f %%F in ('dir /b %OBJDIR%') do (
-    if "%%~xF"==".obj" del %OBJDIR%\%%F
-)
+rmdir /S /Q %OBJDIR%\
+rmdir /S /Q %BINDIR%\
 goto :eof
 
 :run
 set _LIBS_=
-for %%L in (%LIBS%) do (set _LIBS_=!_LIBS_! %LIBDIR%\%%L)
+for %%L in (%LIBS%) do (set _LIBS_=!_LIBS_! %_LIBDIR_%\%%L)
 
 set _INC_=
 for %%I in (%INCDIRS%) do (set _INC_=!_INC_! /I%%I)
 
-call %CXX% %CXXFLAGS% %COMPFLAGS% /Fo:%OBJDIR%\ /Fe:%BINDIR%\%BINARY% %SOURCE% !_LIBS_! !_INC_! /link %LINKFLAGS%
+call %CXX% %CXXFLAGS% %COMPFLAGS% /Fo:%_OBJDIR_%\ /Fe:%BINDIR%\%BINARY% %SOURCE% !_LIBS_! !_INC_! /link %LINKFLAGS%
 
-for /f %%F in ('dir /b %LIBDIR%') do (if "%%~xF"==".dll" echo f | xcopy /y %LIBDIR%\%%F %BINDIR%\%%F)
+for /f %%F in ('dir /b %_LIBDIR_%') do (if "%%~xF"==".dll" echo f | xcopy /y %_LIBDIR_%\%%F %BINDIR%\%%F)
 
 EndLocal

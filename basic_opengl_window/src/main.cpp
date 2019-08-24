@@ -94,7 +94,7 @@ int main()
 {
   /* --- Config variables --- */
   const char * const title = "Basic OpenGL Window";
-  const bool doubleBuffered = false;
+  const bool doubleBuffered = true;
   const uint8_t depthSize = 8;
   const uint8_t colorSize = 8;
   const uint8_t stencilSize = 8;
@@ -187,6 +187,11 @@ int main()
       std::this_thread::yield();
     } while (frameTime < targetFrameTime);
   }
+
+  assert(state.opengl_context != nullptr);
+  SDL_GL_DeleteContext(state.opengl_context);
+  SDL_DestroyWindow(state.window);
+  SDL_Quit();
 
   return 0;
 }

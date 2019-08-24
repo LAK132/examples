@@ -1,18 +1,16 @@
 set BINDIR=bin
 set OBJDIR=obj
 
-if "%mode%"=="release" goto release
-if "%mode%"=="debug" goto debug
-goto :eof
+if not "%mode%"=="release" if not "%mode%"=="debug" goto :eof
 
 set CXX=cl
 
-set BINARY=explorer.exe
+set BINARY=BasicOpenGLWindow.exe
 set SOURCE=src\main.cpp
 
 set COMMDIR=..\common
 set INCDIRS=%COMMDIR%\include %COMMDIR%\include\SDL
-set LIBDIR=lib
+set LIBDIR=%COMMDIR%\lib
 set LIBS=SDL2main.lib SDL2.lib
 
 set CXXFLAGS=/nologo /std:c++17 /D_CRT_SECURE_NO_WARNINGS /MD /EHsc
