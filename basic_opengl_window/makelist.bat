@@ -1,16 +1,16 @@
 set BINDIR=bin
 set OBJDIR=obj
+set COMDIR=..\common
 
 if not "%mode%"=="release" if not "%mode%"=="debug" goto :eof
 
 set CXX=cl
 
 set BINARY=BasicOpenGLWindow.exe
-set SOURCE=src\main.cpp
+set SOURCE=src\main.cpp %COMDIR%\include\GL\gl3w.c
 
-set COMMDIR=..\common
-set INCDIRS=%COMMDIR%\include %COMMDIR%\include\SDL
-set LIBDIR=%COMMDIR%\lib
+set INCDIRS=%COMDIR%\include %COMDIR%\include\SDL
+set LIBDIR=%COMDIR%\lib
 set LIBS=SDL2main.lib SDL2.lib
 
 set CXXFLAGS=/nologo /std:c++17 /D_CRT_SECURE_NO_WARNINGS /MD /EHsc
