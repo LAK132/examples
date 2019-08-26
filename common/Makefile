@@ -1,13 +1,29 @@
+INCFLAGS = $(foreach D,$(INCDIRS),-I$D )$(foreach D,$(LIBDIRS),-L$D )$(foreach L,$(LIBS),-l$L )
 
-GL_GL3W_H = $(COMMDIR)/include/GL/gl3w.h
-GL_GL3W_C = $(COMMDIR)/include/GL/gl3w.c
+$(OUTPUT): $(SOURCE) | $(BINDIR) $(OBJDIR)
+	$(CXX) $(CXXFLAGS) $(OPTIMISATION) -o $(BINDIR)/$(OUTPUT) $(SOURCE) $(INCFLAGS)
+
+clean:
+	rm -f $(BINDIR)/*
+	rm -f $(OBJDIR)/*
+
+$(BINDIR):
+	mkdir $(BINDIR)
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+# Build scripts for common/
+
+GL_GL3W_H = $(COMDIR)/include/GL/gl3w.h
+GL_GL3W_C = $(COMDIR)/include/GL/gl3w.c
 GL_GL3W_O = $(OBJDIR)/gl_gl3w.o
 
-LAK_OPENGL_SHADER_CPP = $(COMMDIR)/include/lak/opengl/shader.cpp
-LAK_OPENGL_SHADER_HPP = $(COMMDIR)/include/lak/opengl/shader.hpp
+LAK_OPENGL_SHADER_CPP = $(COMDIR)/include/lak/opengl/shader.cpp
+LAK_OPENGL_SHADER_HPP = $(COMDIR)/include/lak/opengl/shader.hpp
 LAK_OPENGL_SHADER_O = $(OBJDIR)/lak_opengl_shader.o
 
-LAK_OPENGL_STATE_HPP = $(COMMDIR)/include/lak/opengl/state.hpp
+LAK_OPENGL_STATE_HPP = $(COMDIR)/include/lak/opengl/state.hpp
 
 $(GL_GL3W_O): $(GL_GL3W_C) $(GL_GL3W_H) | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INCFLAGS)
