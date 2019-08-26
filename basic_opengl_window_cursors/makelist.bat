@@ -1,14 +1,14 @@
 set BINDIR=bin
 set OBJDIR=obj
+set COMDIR=..\common
 
 if not "%mode%"=="release" if not "%mode%"=="debug" goto :eof
 
 set CXX=cl
 
 set BINARY=BasicOpenGLWindowCursors.exe
-set SOURCE=src\main.cpp
+set SOURCE=src\main.cpp %COMDIR%\include\GL\gl3w.c
 
-set COMMDIR=..\common
 set INCDIRS=%COMMDIR%\include %COMMDIR%\include\SDL
 set LIBDIR=%COMMDIR%\lib
 set LIBS=SDL2main.lib SDL2.lib

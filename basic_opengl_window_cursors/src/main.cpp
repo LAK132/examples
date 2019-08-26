@@ -240,5 +240,3 @@ int main()
 
   return 0;
 }
-
-#include <GL/gl3w.c>
