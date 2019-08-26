@@ -16,7 +16,7 @@ if "%mode%"=="release" (
 )
 
 if "%mode%"=="debug" (
-  set COMPFLAGS=/Zi /bigobj /O0
+  set COMPFLAGS=/Zi /bigobj /Od
   set LINKFLAGS=/SUBSYSTEM:CONSOLE /DEBUG
 )
 

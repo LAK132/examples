@@ -16,10 +16,10 @@ if "%mode%"=="release" (
 )
 
 if "%mode%"=="debug" (
-  set COMPFLAGS=/Zi /bigobj /O0
+  set COMPFLAGS=/Zi /bigobj /Od
   set LINKFLAGS=/SUBSYSTEM:CONSOLE /DEBUG
 )
 
 call %COMDIR%\makelist.bat
 
-set SOURCE=src\main.cpp %GL_CL3W_C%
+set SOURCE=src\main.cpp %GL_GL3W_C%
