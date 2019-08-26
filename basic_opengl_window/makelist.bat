@@ -1,25 +1,25 @@
 set BINDIR=bin
 set OBJDIR=obj
 set COMDIR=..\common
-
-if not "%mode%"=="release" if not "%mode%"=="debug" goto :eof
-
-set CXX=cl
-
-set BINARY=BasicOpenGLWindow.exe
-set SOURCE=src\main.cpp %COMDIR%\include\GL\gl3w.c
+set OUTPUT=BasicOpenGLWindow.exe
 
 set INCDIRS=%COMDIR%\include %COMDIR%\include\SDL
 set LIBDIR=%COMDIR%\lib
 set LIBS=SDL2main.lib SDL2.lib
 
+set CXX=cl
 set CXXFLAGS=/nologo /std:c++17 /D_CRT_SECURE_NO_WARNINGS /MD /EHsc
 
-:debug
-set COMPFLAGS=/Zi /bigobj /O2
-set LINKFLAGS=/SUBSYSTEM:CONSOLE /DEBUG
-goto :eof
+if "%mode%"=="release" (
+  set COMPFLAGS=/DNDEBUG /bigobj /O2
+  set LINKFLAGS=/SUBSYSTEM:CONSOLE
+)
 
-:release
-set COMPFLAGS=/DNDEBUG /bigobj /O2
-set LINKFLAGS=/SUBSYSTEM:CONSOLE
+if "%mode%"=="debug" (
+  set COMPFLAGS=/Zi /bigobj /O0
+  set LINKFLAGS=/SUBSYSTEM:CONSOLE /DEBUG
+)
+
+call %COMDIR%\makelist.bat
+
+set SOURCE=src\main.cpp %GL_GL3W_C%

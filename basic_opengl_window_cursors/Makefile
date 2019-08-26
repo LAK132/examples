@@ -1,40 +1,23 @@
 BINDIR = bin
 OBJDIR = obj
+COMDIR = ../common
+OUTPUT = BasicOpenGLWindowCursors.elf
 
-CXX = g++-8
-
-BINARY = BasicOpenGLWindowCursors.elf
-SOURCE = src/main.cpp
-
-COMMDIR = ../common
-INCDIRS = $(COMMDIR)/include
+INCDIRS = $(COMDIR)/include
 LIBDIRS =
 LIBS = SDL2 GL dl stdc++fs
 
+CXX = g++-8
+CXXFLAGS = -no-pie -std=c++17 -Wall -Werror -Wfatal-errors -pthread `sdl2-config --cflags`
+
 release: OPTIMISATION := -g0 -O3
-release: $(BINARY)
+release: $(OUTPUT)
 
 debug: OPTIMISATION := -g3 -O0
-debug: $(BINARY)
+debug: $(OUTPUT)
 
-CXXFLAGS = $(OPTIMISATION) -no-pie -std=c++17 -Wall -Werror -Wfatal-errors -pthread `sdl2-config --cflags`
-INCFLAGS = $(foreach D,$(INCDIRS),-I$D )$(foreach D,$(LIBDIRS),-L$D )$(foreach L,$(LIBS),-l$L )
+.PHONY: $(OUTPUT)
 
-include ../common/Makefile
+SOURCE = src/main.cpp $(GL_GL3W_O)
 
-DEPENDS = $(GL_GL3W_O)
-
-$(BINARY): $(DEPENDS) | $(BINDIR) $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -o $(BINDIR)/$(BINARY) $(SOURCE) $(DEPENDS) $(INCFLAGS)
-
-.PHONY: $(BINARY)
-
-clean:
-	rm -f $(BINDIR)/*
-	rm -f $(OBJDIR)/*
-
-$(BINDIR):
-	mkdir $(BINDIR)
-
-$(OBJDIR):
-	mkdir $(OBJDIR)
+include $(COMDIR)/common.mk

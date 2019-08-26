@@ -1,20 +1,3 @@
-INCFLAGS = $(foreach D,$(INCDIRS),-I$D )$(foreach D,$(LIBDIRS),-L$D )$(foreach L,$(LIBS),-l$L )
-
-$(OUTPUT): $(SOURCE) | $(BINDIR) $(OBJDIR)
-	$(CXX) $(CXXFLAGS) $(OPTIMISATION) -o $(BINDIR)/$(OUTPUT) $(SOURCE) $(INCFLAGS)
-
-clean:
-	rm -f $(BINDIR)/*
-	rm -f $(OBJDIR)/*
-
-$(BINDIR):
-	mkdir $(BINDIR)
-
-$(OBJDIR):
-	mkdir $(OBJDIR)
-
-# Build scripts for common/
-
 GL_GL3W_H = $(COMDIR)/include/GL/gl3w.h
 GL_GL3W_C = $(COMDIR)/include/GL/gl3w.c
 GL_GL3W_O = $(OBJDIR)/gl_gl3w.o
@@ -30,3 +13,20 @@ $(GL_GL3W_O): $(GL_GL3W_C) $(GL_GL3W_H) | $(OBJDIR)
 
 $(LAK_OPENGL_SHADER_O): $(LAK_OPENGL_SHADER_CPP) $(LAK_OPENGL_SHADER_HPP) $(LAK_OPENGL_STATE_HPP) | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INCFLAGS)
+
+clean:
+	rm -f $(BINDIR)/*
+	rm -f $(OBJDIR)/*
+
+$(BINDIR):
+	mkdir $(BINDIR)
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+
+
+INCFLAGS = $(foreach D,$(INCDIRS),-I$D )$(foreach D,$(LIBDIRS),-L$D )$(foreach L,$(LIBS),-l$L )
+
+$(OUTPUT): $(SOURCE) | $(BINDIR) $(OBJDIR)
+	$(CXX) $(CXXFLAGS) $(OPTIMISATION) -o $(BINDIR)/$(OUTPUT) $(SOURCE) $(INCFLAGS)
