@@ -8,7 +8,7 @@ LAK_OPENGL_SHADER_O = $(OBJDIR)/lak_opengl_shader.o
 
 LAK_OPENGL_STATE_HPP = $(COMDIR)/include/lak/opengl/state.hpp
 LAK_OPENGL_STATE_CPP = $(COMDIR)/include/lak/opengl/state.cpp
-LAK_OPENGL_STATE_O = $(COMDIR)/include/lak/opengl/state.o
+LAK_OPENGL_STATE_O = $(OBJDIR)/lak_opengl_state.o
 
 $(GL_GL3W_O): $(GL_GL3W_C) $(GL_GL3W_H) | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INCFLAGS)
