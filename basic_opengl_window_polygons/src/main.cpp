@@ -69,7 +69,6 @@ struct program_state
   GLuint polygons_vert_shader;
   GLuint polygons_frag_shader;
   GLuint polygons_shader_program;
-  GLuint polygons_texture;
   GLuint polygons_array_buffer;
   GLuint polygons_vertex_array;
 };
@@ -192,7 +191,7 @@ void handle_draw(program_state &state)
   glEnable(GL_BLEND);
   glDisable(GL_CULL_FACE);
   glDisable(GL_DEPTH_TEST);
-  glEnable(GL_SCISSOR_TEST);
+  glDisable(GL_SCISSOR_TEST);
 
   {
     const float W = state.screen_size_x;
