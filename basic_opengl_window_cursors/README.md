@@ -1,4 +1,4 @@
-# basic_opengl_window
+# basic_opengl_window_cursors
 
 Opens a window with SDL2 and initialises an OpenGL context for it.
 

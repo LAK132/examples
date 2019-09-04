@@ -1,4 +1,4 @@
-# basic_opengl_window
+# basic_opengl_window_polygons_indexed
 
 Opens a window with SDL2, initialises an OpenGL context for it and renders some
 polygons.
